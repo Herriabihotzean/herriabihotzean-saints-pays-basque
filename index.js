@@ -2,8 +2,8 @@
 const HB_KEY="herria_langue";
 const LABELS={fr:{fr:"français",eu:"basque"},eu:{fr:"frantsesez",eu:"eskuaraz"}};
 const INDEX_TEXT={
- fr:{title:"Les saints du Pays Basque",subtitle:"par le chanoine Pierre Andiazabal (1923-2020)",back:"← Retour à Histoire"},
- eu:{title:"Eskual Herriko Sainduak",subtitle:"Pierre Andiazabal Kalonjeak (1923-2020)",back:"← Historiarat itzuli"}
+ fr:{title:"Les saints du Pays Basque",subtitle:"par le chanoine Pierre Andiazabal (1923-2020)",back:"← Retour vers Histoire"},
+ eu:{title:"Eskual Herriko Sainduak",subtitle:"Pierre Andiazabal Kalonjeak (1923-2020)",back:"← Istoriarat itzuli"}
 };
 function readIncomingLanguage(){const p=new URLSearchParams(location.search).get("lang");if(p==="fr"||p==="eu")return p;try{return localStorage.getItem(HB_KEY)==="eu"?"eu":"fr"}catch(_e){return"fr"}}
 function saveGeneralLanguage(lang){try{localStorage.setItem(HB_KEY,lang)}catch(_e){}}
