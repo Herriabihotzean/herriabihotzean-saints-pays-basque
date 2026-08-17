@@ -31,7 +31,18 @@ document.addEventListener("DOMContentLoaded",()=>{
   next.disabled=idx===tracks.length-1;
 }
  function show(lang){content=lang==="fr"?"fr":"eu";document.documentElement.lang=content;sections.forEach(s=>s.hidden=s.dataset.saintLang!==content);buttons.forEach(b=>{const active=b.dataset.lang===content;b.classList.toggle("active",active);b.setAttribute("aria-pressed",active?"true":"false")});updateTrack()}
- listen.addEventListener("click",()=>{panel.hidden=!panel.hidden;listen.setAttribute("aria-expanded",panel.hidden?"false":"true")});
+ listen.addEventListener("click",()=>{
+  panel.hidden=!panel.hidden;
+
+  listen.setAttribute(
+    "aria-expanded",
+    panel.hidden?"false":"true"
+  );
+
+  if(!panel.hidden){
+    updateTrack();
+  }
+});
  prev.addEventListener("click",()=>{if(idx>0){idx--;updateTrack();audio.play().catch(()=>{})}});
  next.addEventListener("click",()=>{if(idx<tracks.length-1){idx++;updateTrack();audio.play().catch(()=>{})}});
  audio.addEventListener("ended",()=>{if(idx<tracks.length-1){idx++;updateTrack();audio.play().catch(()=>{})}});
