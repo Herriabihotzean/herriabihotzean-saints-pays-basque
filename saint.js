@@ -18,7 +18,18 @@ document.addEventListener("DOMContentLoaded",()=>{
  listen.textContent=t.listen; prev.textContent="← "+t.prev; next.textContent=t.next+" →";
  buttons.forEach(b=>{const code=b.dataset.lang;b.querySelector(".language-label").textContent=t[code];b.addEventListener("click",()=>show(code))});
  function currentTitle(){return content==="fr"?titleFr:titleEu}
- function updateTrack(){if(!tracks.length)return;audio.src="audio/"+tracks[idx]+".mp3";label.textContent=currentTitle()+" — "+(idx+1)+"/"+tracks.length;prev.disabled=idx===0;next.disabled=idx===tracks.length-1}
+ function updateTrack(){
+  if(!tracks.length)return;
+
+  audio.src="audio/"+tracks[idx]+".mp3";
+  audio.load();
+
+  label.textContent=
+    currentTitle()+" — "+(idx+1)+"/"+tracks.length;
+
+  prev.disabled=idx===0;
+  next.disabled=idx===tracks.length-1;
+}
  function show(lang){content=lang==="fr"?"fr":"eu";document.documentElement.lang=content;sections.forEach(s=>s.hidden=s.dataset.saintLang!==content);buttons.forEach(b=>{const active=b.dataset.lang===content;b.classList.toggle("active",active);b.setAttribute("aria-pressed",active?"true":"false")});updateTrack()}
  listen.addEventListener("click",()=>{panel.hidden=!panel.hidden;listen.setAttribute("aria-expanded",panel.hidden?"false":"true")});
  prev.addEventListener("click",()=>{if(idx>0){idx--;updateTrack();audio.play().catch(()=>{})}});
